@@ -42,7 +42,6 @@ if [ ! -d /etc/systemd/system/$SERVICE_NAME.service.d ]
     mkdir /etc/systemd/system/$SERVICE_NAME.service.d
 fi
 
-
 # Copy the conf file
 cp "$(pwd)/$SERVICE_NAME.conf" /etc/systemd/system/$SERVICE_NAME.service.d/$SERVICE_NAME.conf
 
