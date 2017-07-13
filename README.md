@@ -6,6 +6,7 @@ Simple SSH Tunnel service for systemd to launch at startup and run an SSH tunnel
 
 ````bash
 git clone git@github.com:CadyIO/ssh-tunnel-service.git
+cd ./ssh-tunnel-service
 sudo chmod +x ./install.sh
 sudo ./install.sh
 ````
