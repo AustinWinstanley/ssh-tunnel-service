@@ -1,5 +1,5 @@
 [Unit]
-Description=SSH Tunnel background service
+Description=SSH Tunnel Background Service
 # Wait for the internet to come online
 After=network.target network-online.target
 
