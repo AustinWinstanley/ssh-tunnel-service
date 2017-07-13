@@ -7,15 +7,6 @@ After=network.target network-online.target
 # Fork this service into a background process
 Type=forking
 
-# Set the environment variables
-EnvironmentFile=/etc/ssh-tunnel-service/ssh-tunnel-service.conf
-
-# Connect to the SSH Tunnel in the background on start
-ExecStart=/bin/sh -c "/usr/bin/ssh -N -D ${SSH_PORT} -o StrictHostKeyChecking=no -i ${SSH_PRIVATE_KEY} ${SSH_TUNNEL_USERNAME}@${SSH_TUNNEL_HOST} &"
-
-# Find and kill the process on stop
-ExecStop=/bin/kill $(pgrep -f ${SSH_TUNNEL_HOST})
-
 # Always restart and try after > 2 seconds to avoid 'Too Fast' error
 Restart=always
 RestartSec=3

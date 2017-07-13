@@ -6,11 +6,27 @@ if [ "$(id -u)" != "0" ]; then
    exit 1
 fi
 
+# Validate Service Name argument
+if [ "$#" -ne 1 ]
+then
+  echo "Please provide a service name."
+  exit 1
+fi
+
+# Set the Service Name from the provided argument
+SERVICE_NAME=$1
+
 # Stop the service
-systemctl stop ssh-tunnel-service.service
+systemctl stop $SERVICE_NAME.service
 
 # Disable the service
-systemctl disable ssh-tunnel-service.service
+systemctl disable $SERVICE_NAME.service
+
+# Delete the service
+rm /etc/systemd/system/$SERVICE_NAME.service
 
 # Delete the conf directory
-rm -R /etc/ssh-tunnel-service
+if [ -d /etc/systemd/system/$SERVICE_NAME.service.d ]
+  then
+    rm -R /etc/systemd/system/$SERVICE_NAME.service.d
+fi

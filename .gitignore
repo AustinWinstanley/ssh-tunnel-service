@@ -1,2 +1,2 @@
 .vscode
-ssh-tunnel-service.conf
+*.conf
