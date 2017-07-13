@@ -1,0 +1,17 @@
+[Unit]
+Description=Start the Pressable Proxy in the background
+After=network.target network-online.target
+
+[Service]
+Type=forking
+
+EnvironmentFile=/etc/ssh-tunnel-service/ssh-tunnel-service.conf
+
+ExecStart=/bin/sh -c "/usr/bin/ssh -N -D ${SSH_PORT} -o StrictHostKeyChecking=no -i ${SSH_PRIVATE_KEY} ${SSH_TUNNEL_USERNAME}@${SSH_TUNNEL_HOST} &"
+ExecStop=/bin/kill $(pgrep -f ${SSH_TUNNEL_HOST})
+
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target
